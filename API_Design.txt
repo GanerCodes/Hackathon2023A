@@ -20,7 +20,9 @@ API:
     /getPanelData {
         id: SOLARID
     } → SOLAR_PANEL_OBJECT
-
+    
+    /addPanel {SOLAR_PANEL_OBJECT} → ∅
+    
     /setPanelData {
         id: SOLARID
         ? charging_rate: float
