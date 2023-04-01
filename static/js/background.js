@@ -14,7 +14,6 @@ function updateDisplay() {
 	if(forecast.length > 0) {
 		for(let i = 0; i < DAYS; i++) {
 			let day_info = forecast[i];
-			console.log(day_info);
 			let sunrise = new Date(day_info.sunrise),
 				sunset = new Date(day_info.sunset);
 			daylightElements[i].innerHTML = `${zero(sunrise.getHours(), 2)}:${zero(sunrise.getMinutes(), 2)} - ${zero(sunset.getHours(), 2)}:${zero(sunset.getMinutes(), 2)}`;
@@ -99,18 +98,19 @@ function refreshBatteryData() {
 
 window.addEventListener("load", () => {
 	//~	testing
+	let testPanelId = "A039B8CD";
 	addPanel(new Panel(
-		"test_panel_id",
+		testPanelId,
 		new Battery(BatteryStates.CHARGING, Math.random(), Math.random() * 0.2, Math.random() * 0.1)
 	));
 	setTimeout(() => {
-		getPanelData("test_panel_id", setPanel);
+		getPanelData(testPanelId, setPanel);
 	}, 1000);
 	setTimeout(() => {
-		setPanelData("test_panel_id", new ChargeRates(Math.random() * 0.4, Math.random() * 0.3));
+		setPanelData(testPanelId, new ChargeRates(Math.random() * 0.4, Math.random() * 0.3));
 	}, 2000);
 	setTimeout(() => {
-		getPanelData("test_panel_id", setPanel);
+		getPanelData(testPanelId, setPanel);
 	}, 3000);
 	//~	testing
 

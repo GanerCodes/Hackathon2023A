@@ -15,17 +15,10 @@ function submitPanel() {
 		dischargingRate = Number(pDechargingRateElement.value);
 	if(panelIds.indexOf(id) < 0) {
 		//doesn't yet exist, add panel
-		addPanel(
-			new Panel(
-				id,
-				new Battery(
-					BatteryStates.CHARGING,
-					currentCharge,
-					chargingRate,
-					dischargingRate
-				)
-			)
-		);
+		let newPanel = new Panel(id, new Battery(BatteryStates.CHARGING, currentCharge, chargingRate, dischargingRate));
+		addPanel(newPanel);
+		panels[id] = newPanel;
+		panelIds.push(id);
 	}
 	else {
 		setPanelData(
@@ -39,9 +32,9 @@ function submitPanel() {
 }
 
 window.addEventListener("load", () => {
-	pNameElement = document.getElementById("id");
-	pLocationElement = document.getElementById("location");
-	pChargeElement = document.getElementById("currcharge");
-	pChargingRateElement = document.getElementById("chargerate");
-	pDechargingRateElement = document.getElementById("dischargerate");
+	pNameElement = document.getElementById("nameId");
+	// pLocationElement = document.getElementById("location");
+	pChargeElement = document.getElementById("currentCharge");
+	pChargingRateElement = document.getElementById("chargeRate");
+	pDechargingRateElement = document.getElementById("dischargeRate");
 });

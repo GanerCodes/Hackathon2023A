@@ -11,6 +11,19 @@ function getForecast(callback) {
 		});
 	});
 }
+function getPanelSchedule(solarId, callback) {
+	getLocation((coords) => {
+		neufetch("getPanelSchedule", {
+			id: solarId,
+			latitude: coords.latitude,
+			longitude: coords.longitude,
+			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+		}, (data) => {
+			console.debug("getPanelSchedule", data);
+			callback(data);
+		});
+	});
+}
 
 
 //PANEL STUFF

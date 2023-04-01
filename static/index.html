@@ -97,26 +97,26 @@
 
     <section class="panel">
         <h1>Panel</h1>
-        <div class="panel-add">
+        <div class="panel-set">
             <div>
                 <label for="nameId">Name ID: </label>
                 <input type="text" id="nameId" name="nameId" required>
             </div>
             <div>
-                <label for="currentCharge">Current charge </label>
+                <label for="currentCharge">Current Charge: </label>
                 <input type="currentCharge" id="currentCharge" name="currentCharge">
             </div>
             <div>
-                <label for="currentRate">Current rate </label>
-                <input type="currentRate" id="currentRate" name="currentRate">
+                <label for="chargeRate">Charge Rate: </label>
+                <input type="chargeRate" id="chargeRate" name="chargeRate">
             </div>
             <div>
                 <label for="dischargeRate">Discharge Rate: </label>
                 <input type="dischargeRate" id="dischargeRate" name="dischargeRate">
             </div>
-            <input type="submit">
+            <input type="submit" onclick="submitPanel();">
         </div>
-        <div class="panel-edit">
+        <div class="panel-view">
             <div>
                 <p>id demo</p>
                 <p>value</p>
@@ -146,6 +146,11 @@
         <p id="battery-info"> 50 </p>
         <i class="fa-solid fa-bolt"></i>
     </section>
+
+	<section class="data">
+		<button onclick="wowForecast();">FORECAST!</button>
+		<img id="schedule-img"/>
+	</section>
 
 </body>
 
