@@ -45,4 +45,7 @@ def create_schedule(curve, panel):
     optimizer.merge_tops()
     return {
         "state_schedule": optimizer.Pa,
-        "extremes": optimizer.compute_extremes}
+        "extremes": [{
+            "time": time,
+            "type": Type
+        } for time, Type in optimizer.compute_extremes]}
