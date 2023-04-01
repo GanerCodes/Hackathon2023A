@@ -127,6 +127,7 @@ class Optimizer:
         extremes = 𝕊.compute_extremes(𝕊.max_p_integral, 𝕊.Pm)
         if len(extremes):
             extremes.insert(0, [0, 0])
+            # extremes.insert(0, [0, 0])
         
         while extremes and (e := extremes.pop(0)):
             if e[1] == Optimizer.MIN:
@@ -137,11 +138,12 @@ class Optimizer:
                         continue
                     extremes.insert(0, k)
                     break
-                if len(j) >= 2:
+                if len(j) >= 3:
                     p1, p2 = 𝕊.find_peak_reduce_split_point(e[0], j[0], j[-1])
                     𝕊.Pa[p1:p2] = [False] * (p2-p1)
                     𝕊.max_p_integral = 𝕊.compute_p_integral()
                     𝕊.merge_tops()
+                    break
 
 if __name__ == "__main__":
     dt = 0.001
@@ -151,6 +153,7 @@ if __name__ == "__main__":
     extremes = j.compute_extremes(j.max_p_integral, j.Pm, True)
     plt.plot(j.max_p_integral)
     plt.scatter(*zip(*extremes))
+    j.flatten_tops()
     j.merge_tops()
     plt.plot(j.max_p_integral)
     plt.plot(*zip(*enumerate(j.Pa)))

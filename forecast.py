@@ -55,8 +55,8 @@ def internal_forecast(latitude, longitude, timezone):
 			time = hour_info["time"][hour] + minute
 			day_night = 1 if (res["daily"]["sunrise"][math.floor(hour / 24)] <= time and time <= res["daily"]["sunset"][math.floor(hour / 24)]) else 0
 			y *= day_night
-			data.append(max(0, min(6 * y, 1)))
-	return moving_average(data+[1]*60*20, 30)
+			data.append(max(0, min(0.1 + 3 * y, 1)))
+	return moving_average([1]*60*20+data+[1]*60*20, 30)
 
 if __name__ == "__main__":
 	test_data = (36.0663068, -94.1738257, "America/Chicago")
