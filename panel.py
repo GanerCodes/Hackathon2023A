@@ -49,12 +49,13 @@ def create_schedule(curve, panel):
         optimizer.Pm,
         True)
     
+    rl = len(curve) - 1200
     plt.gcf().set_size_inches(9, 5)
-    plt.plot(optimizer.max_p_integral)
-    plt.scatter(*zip(*extremes))
+    plt.plot(optimizer.max_p_integral[:rl])
+    plt.scatter(*zip(*[e for e in extremes if e[0] < rl]))
     optimizer.merge_tops()
-    plt.plot(optimizer.max_p_integral)
-    plt.plot(*zip(*enumerate(optimizer.Pa)))
+    plt.plot(optimizer.max_p_integral[:rl])
+    plt.plot(*zip(*enumerate(optimizer.Pa[:rl])))
 
     img_path = f"./static/panel_images/{Id}.png"
     plt.savefig(img_path, dpi=200)
