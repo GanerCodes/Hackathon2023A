@@ -1,4 +1,3 @@
-
 class Panel:
     STATES = {0: "disconnected",
               1: "charging",
