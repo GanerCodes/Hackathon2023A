@@ -18,7 +18,7 @@ Panel_template = {
     "id": str,
     "battery": {
         "state": int,
-        "precent_charged": Number,
+        "percent_charged": Number,
         "charging_rate": Number,
         "decharging_rate": Number
     }
