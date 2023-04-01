@@ -34,7 +34,7 @@
 /*Header styling*/
 header{
     width:100%;
-    height:410px;
+    height:450px;
     background-image:url("https://media.giphy.com/media/HG66wqdGpiLeP5uwzO/giphy.gif");
     background-size:cover;
     display:flex;
@@ -44,36 +44,108 @@ header{
 header h1{
     color:white;
     font-family: 'Russo One', sans-serif;
-    font-size:50px;
+    font-size:100px;
     letter-spacing:8px;
     text-shadow:2px 2px 5px rgb(106, 157, 31), -2px -2px 5px rgb(36, 157, 255);
     padding:10px 0;
     margin:10px 0;
 }
 /*Weather section*/
-.forcast{
-    height:400px;
+.forecast{
+    height:600px;
     width:100%;
-    background-color:green;
+    background-color:black;
+    font-family: 'Russo One', sans-serif;
 }
+
+.forecast h1{
+    padding:10px 0 0 0;
+    text-align:center;
+    color:white;
+    padding:20px;
+    font-size:80px;
+    text-decoration-line:underline;
+    text-shadow:2px 2px 5px rgb(106, 157, 31), -2px -2px 5px rgb(36, 157, 255);
+}
+
+.forecast ul{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+}
+
+.forecast ul li{
+    color:white;
+    list-style:none;
+    text-align:center;
+}
+
 /*Energy section*/
 .energy{
+    position:relative;
     height:400px;
     width:100%;
-    background-color:orange;
+    background-color:black;
+    font-family: 'Russo One', sans-serif;
+    color:white;
 }
+.energy h1{
+    padding:10px 0 0 0;
+    text-align:end;
+    color:white;
+    padding:20px;
+    font-size:80px;
+    text-decoration-line:underline;
+    text-shadow:2px 2px 5px rgb(106, 157, 31), -2px -2px 5px rgb(36, 157, 255);
+}
+.energy p{
+    position:absolute;
+    top:175px;
+    left:100px;
+    font-size:20px;
+}
+.energy p span{
+    font-size:60px;
+}
+
+
 /*Weather section*/
 .battery{
     position:relative;
     height:400px;
     width:100%;
-    background-color:lightblue;
+    background-color:rgb(76, 76, 76);
+    overflow:hidden;
 }
 .battery div{
     position:absolute;
     top:-200px;
-    width:800px;
+    left:-200px;
     height:800px;
-    border-radius:50%;
+    width:700px;
     background-color:black;
+    border-radius:25%;
+
+}
+.battery h1, .battery p{
+    font-family: 'Russo One', sans-serif;
+    color:white;
+    z-index:2;
+}
+.battery h1{
+    position:absolute;
+    top: 20px;
+    margin:20px;
+    font-size:80px;
+    text-decoration-line:underline;
+    text-shadow:2px 2px 5px rgb(106, 157, 31), -2px -2px 5px rgb(36, 157, 255);
+}
+.battery p{
+    position:absolute;
+    margin:20px;
+    width:400px;
+    top:120px;
+    font-size:20px;
+    
 }
