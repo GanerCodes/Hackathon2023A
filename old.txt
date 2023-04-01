@@ -1,0 +1,26 @@
+        
+        if lb is None: lb = p1
+        if rb is None: rb = p2
+        
+        target = target or (𝕊.Pm-𝕊.max_p_integral[p1])
+        if lb > rb:
+            gain_cache = 𝕊.compute_gain_integral(p1, p2)
+            for i in range(p1, lb):
+                # j = 𝕊.integrate_gain(mid, p2) - 𝕊.integrate_loss(p1, i)
+                j = (gain_cache[i] - gain_cache[p1]) - 𝕊.integrate_loss(p1, i)
+                print(j, 0.2 * 𝕊.Pm)
+                if 𝕊.max_p_integral[p1] + j <= 0.2 * 𝕊.Pm:
+                    return i - 1
+            return lb
+        
+        mid = (lb + rb) // 2
+
+        seg_L = 𝕊.integrate_loss(p1, p2)
+        seg_G = 𝕊.integrate_gain(mid, p2)
+        total = seg_G - seg_L
+        print(f"({p1=}, {p2=}) {mid=} | L/G=({seg_L}, {seg_G}) | {total=} | {target=}")
+        if total < target:
+            return 𝕊.find_split_point(p1, p2, target, lb, mid - 1)
+        elif total > target:
+            return 𝕊.find_split_point(p1, p2, target, mid + 1, rb)
+        return mid
