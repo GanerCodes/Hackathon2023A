@@ -23,8 +23,6 @@ def getPanelData():
 @app.route('/addPanel', methods=['POST'])
 def addPanel():
     data = request.get_json()
-    if get_panel(data['id']):
-        return Reply.error()
     set_panel(data)
     return Reply.ok()
 
