@@ -1,9 +1,12 @@
 from flask import *
 from database import *
 
-class Response:
-    error = jsonify({'error': 'L+ratio+you fell off'}), 500
-    ok = Response(status=200)
+class Reply:
+    error = lambda: (jsonify({'error': 'L+ratio+you fell off'}), 500)
+    ok = lambda: (Response(status=200))
+    def __getattr__(self, name):
+        return getattr(Reply, name)()
+Reply = Reply()
 
 app = Flask(__name__)
 
@@ -15,16 +18,16 @@ def getPanelData():
     panel = get_panel(data['id'])
     if panel:
         return jsonify(panel)
-    return Response.error
+    return Reply.error
 
 @app.route('/addPanel', methods=['POST'])
-def getPanelData():
+def addPanel():
     data = request.get_json()
     set_panel(data)
-    return Response.ok
+    return Reply.ok
 
 @app.route('/setPanelData', methods=['POST'])
-def getPanelData():
+def setPanelData():
     data = request.get_json()
     merge_panel(data)
-    return Response.ok
+    return Reply.ok
