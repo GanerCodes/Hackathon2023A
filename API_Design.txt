@@ -25,6 +25,8 @@ API:
     
     /setPanelData {
         id: SOLARID
-        ? charging_rate: float
-        ? decharging_rate: float
+        ? battery {
+            ? charging_rate: float
+            ? decharging_rate: float
+        }
     } → ∅
