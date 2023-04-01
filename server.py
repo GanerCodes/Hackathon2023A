@@ -1,7 +1,7 @@
 # from flask import Flask, render_template, send_from_directory, redirect, url_for
 from sqlitedict import SqliteDict
 from flask import *
-database = SqliteDict("database.sqlite", tablename="product", autocommit=True)
+database = SqliteDict("panels.sqlite", tablename="panels", autocommit=True)
 
 app = Flask(__name__)
 
