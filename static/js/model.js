@@ -19,10 +19,10 @@ class Battery {
 		this.decharging_rate = decharging_rate;
 		console.log(this);
 	}
-	// set_charging_rate = (rate) => {
-	// 	this.charging_rate = rate;
-	// }
-	// set_decharging_rate = (rate) => {
-	// 	this.decharging_rate = rate;
-	// }
+	set_charging_rate = (rate) => {
+		this.charging_rate = rate;
+	}
+	set_decharging_rate = (rate) => {
+		this.decharging_rate = rate;
+	}
 }
