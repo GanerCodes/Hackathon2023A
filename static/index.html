@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,6 +22,9 @@
         <title>Solar Sustainability</title>
     </head>
     <body>
+        <script src="./js/model.js"></script>
+        <script src="./js/interface.js"></script>
+        <script src="./js/background.js"></script>
         <div class="navbar">
             <ul>
                 <li id="logo">∅<--<</li>
@@ -95,57 +97,6 @@
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum aliquid accusamus soluta nostrum aspernatur totam, quia blanditiis, itaque porro alias consequuntur, aut beatae non architecto? Ex, rerum fugiat. Hic, perspiciatis?</p>
             <div></div>
             <p id="battery-info"></p>
-        </section>
-
-        <script>
-            fetch('/api')
-                .then(response => response.json())
-                .then(data => console.log(data));
-        </script>
-
-    </body>
-</html>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-        <title>Solar Sustainability</title>
-    </head>
-    <body>
-		<script src="./js/model.js"></script>
-		<script src="./js/interface.js"></script>
-		<script src="./js/background.js"></script>
-        <div class="navbar">
-            <ul>
-                <li id="logo">∅<--<</li>
-            </ul>
-            <ul>
-                <li>Home</li>
-                <li>Login</li>
-            </ul>
-        </div>
-        <header>
-            <h1>HELIOS MECHANiSM</h1>
-        </header>
-
-        <section class="forcast">
-            <h1>Forcast (24 hours)</h1>
-
-        </section>
-
-        <section class="energy"></section>
-
-        <section class="battery">
-            <h1>Battery Life</h1>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam voluptates nihil laborum suscipit, doloribus quae totam praesentium. Corporis vitae eum iure obcaecati amet quibusdam neque? Quos earum et perspiciatis assumenda?</p>
-            <p id="battery-info"></p>
-            <div></div>
         </section>
     </body>
 </html>
