@@ -73,13 +73,15 @@ class Optimizer:
         
         gain_cache = 𝕊.compute_gain_integral(0, len(𝕊.Pe))
         start_val = 𝕊.max_p_integral[p1]
+        
         for i in range(p1, p2):
             delta_loss = 𝕊.integrate_loss(p1, i)
             current_total = start_val - delta_loss
             if current_total < 0.2 * 𝕊.Pm:
                 return i - 1
-            
+                
             total = start_val + (gain_cache[p2] - gain_cache[i]) - 𝕊.integrate_loss(p1, p2)
+            
             if total < target:
                 return i - 1
         return p2
@@ -88,11 +90,13 @@ class Optimizer:
         gain_cache = 𝕊.compute_gain_integral(0, len(𝕊.Pe))
         start_val = 𝕊.max_p_integral[p1]
         for i in reversed(range(p1, p2)):
-            if start_val + gain_cache[i] < 0.8 * 𝕊.pM:
+            val = start_val + (gain_cache[i] - gain_cache[p1]) - 𝕊.integrate_loss(p1, i)
+            if val < 0.8 * 𝕊.Pm:
                 marker = i + 1
                 break
         else:
             raise Exception()
+        print(marker, p3)
         return marker, 𝕊.find_split_point(marker, p3)
     
     def flatten_tops(𝕊):
@@ -120,18 +124,41 @@ class Optimizer:
     
     def merge_tops(𝕊):
         extremes = 𝕊.compute_extremes(𝕊.max_p_integral, 𝕊.Pm)
-        for i in range(len(extremes)-2):
-            points = extremes[i:i+3]
-            if not all(p[1] == P for p, P in zip(points, (Optimizer.MIN, Optimizer.MAX, Optimizer.MAX))):
-                continue
+        
+        while extremes and (e := extremes.pop(0)):
+            if e[1] == Optimizer.MIN:
+                j = []
+                while extremes and (k := extremes.pop(0)):
+                    if k[1] == Optimizer.MAX:
+                        j.append(k[0])
+                        continue
+                    extremes.insert(0, k)
+                    break
+                if len(j) >= 2:
+                    p1, p2 = 𝕊.find_peak_reduce_split_point(e[0], j[0], j[-1])
+                    𝕊.Pa[p1:p2] = [False] * (p2-p1)
+                    𝕊.max_p_integral = 𝕊.compute_p_integral()   
+                    𝕊.merge_tops()
+                    return
             
+        """ for i in range(len(extremes)-2):
+            points = extremes[i:i+3]
+            if not all(p[1] == P for p, P in zip(points, pattern)):
+                continue
+            p1, p2 = 𝕊.find_peak_reduce_split_point(*[p[0] for p in points])
+            print("n", p1, p2)
+            𝕊.Pa[p1:p2] = [False] * (p2-p1)
+            𝕊.max_p_integral = 𝕊.compute_p_integral() """
+
 
 dt = 0.001
-j = Optimizer([0.1*((x*dt)**1/4)*(cos((x*dt))+1) for x in range(int(50 / dt))], dt=dt)
+j = Optimizer([
+    0.1*((x*dt)**1/2)*(cos((x*dt))+1) if x*dt < 40 else 0
+    for x in range(int(50 / dt))], dt=dt)
 extremes = j.compute_extremes(j.max_p_integral, j.Pm, True)
 plt.plot(j.max_p_integral)
 plt.scatter(*zip(*extremes))
-j.flatten_tops()
+j.merge_tops()
 plt.plot(j.max_p_integral)
 plt.plot(*zip(*enumerate(j.Pa)))
 plt.show()
