@@ -14,6 +14,7 @@ Types:
     }
     SOLAR_SCHEDULE_OBEJCT {
         state_schedule: bool[] # Represents the state at a given minute
+        image: String # Represents the releative path of the graph image
         extremes: EXTREMA[] # Represents times that the battery turns to 0% or 100%
     }
 
