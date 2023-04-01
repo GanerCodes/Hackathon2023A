@@ -2,3 +2,4 @@ flask
 sqlitedict
 mergedeep
 requests
+geopy/geocodes library
