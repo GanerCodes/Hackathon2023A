@@ -86,7 +86,7 @@ class Optimizer:
                 return i - 1
         return p2
     
-    def find_peak_reduce_split_point(𝕊, p1, p2, p3): # 1→0→1
+    def find_peak_reduce_split_point(𝕊, p1, p2, p3): # 0→1→1
         gain_cache = 𝕊.compute_gain_integral(0, len(𝕊.Pe))
         start_val = 𝕊.max_p_integral[p1]
         for i in reversed(range(p1, p2)):
