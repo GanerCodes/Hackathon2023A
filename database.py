@@ -1,5 +1,5 @@
 from sqlitedict import SqliteDict
-from Panel import fit_data, Panel_template, Panel_update_template
+from panel import fit_data, Panel_template, Panel_update_template
 from mergedeep import merge
 
 panel_database = SqliteDict("panels.sqlite", tablename="panels", autocommit=True)
