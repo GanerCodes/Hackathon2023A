@@ -2,7 +2,7 @@ from math import cos
 import matplotlib.pyplot as plt
 from itertools import accumulate
 from functools import reduce
-import operator
+import operator, os
 
 def clamp(x, a, b):
     return min(max(x, a), b)
@@ -24,24 +24,24 @@ class Optimizer:
         𝕊.dt = dt
         𝕊.Pa = [True] * len(𝕊.Pe)
         𝕊.max_p_integral = 𝕊.compute_p_integral()
-    
+
     def clamp_battery(𝕊, v):
         return clamp(v, 0, 𝕊.Pm)
-    
+
     def mPe(𝕊, i):
         return 𝕊.Pe[i] * 𝕊.Pa[i]
-    
+
     def integrate_gain(𝕊, p1, p2):
         return reduce(
             operator.add,
             (𝕊.mPe(x)*𝕊.Pg*𝕊.dt for x in range(p1, p2)), 0)
-    
+
     def compute_gain_integral(𝕊, p1, p2, C=0):
         return list(accumulate(
             (𝕊.mPe(x)*𝕊.Pg*𝕊.dt for x in range(p1, p2)),
             operator.add,
             initial=C))
-    
+
     def integrate_loss(𝕊, p1, p2):
         return 𝕊.Pd * 𝕊.dt*(p2 - p1)
 
@@ -70,27 +70,29 @@ class Optimizer:
 
     def find_split_point(𝕊, p1, p2, target=None):
         target = target or 𝕊.Pm
-        
+
         gain_cache = 𝕊.compute_gain_integral(0, len(𝕊.Pe))
         start_val = 𝕊.max_p_integral[p1]
-        
+
         for i in range(p1, p2):
             delta_loss = 𝕊.integrate_loss(p1, i)
             current_total = start_val - delta_loss
             if current_total < 0.2 * 𝕊.Pm:
                 return i - 1
-                
-            total = start_val + (gain_cache[p2] - gain_cache[i]) - 𝕊.integrate_loss(p1, p2)
-            
+
+            total = start_val + \
+                (gain_cache[p2] - gain_cache[i]) - 𝕊.integrate_loss(p1, p2)
+
             if total < target:
                 return i - 1
         return p2
-    
-    def find_peak_reduce_split_point(𝕊, p1, p2, p3): # 0→1→1
+
+    def find_peak_reduce_split_point(𝕊, p1, p2, p3):  # 0→1→1
         gain_cache = 𝕊.compute_gain_integral(0, len(𝕊.Pe))
         start_val = 𝕊.max_p_integral[p1]
         for i in reversed(range(p1, p2)):
-            val = start_val + (gain_cache[i] - gain_cache[p1]) - 𝕊.integrate_loss(p1, i)
+            val = start_val + \
+                (gain_cache[i] - gain_cache[p1]) - 𝕊.integrate_loss(p1, i)
             if val < 0.8 * 𝕊.Pm:
                 marker = i + 1
                 break
@@ -98,7 +100,7 @@ class Optimizer:
             raise Exception()
         print(marker, p3)
         return marker, 𝕊.find_split_point(marker, p3)
-    
+
     def flatten_tops(𝕊):
         extremes = 𝕊.compute_extremes(𝕊.max_p_integral, 𝕊.Pm)
         skip = 0
@@ -106,11 +108,11 @@ class Optimizer:
             if skip:
                 skip -= 1
                 continue
-            
+
             if i == len(extremes) - 1:
                 break
             n_x, n_T = extremes[i + 1]
-            
+
             if T == Optimizer.MAX == n_T:
                 sp = j.find_split_point(x, n_x)
                 𝕊.Pa[x+1:sp] = [False] * (sp - x)
@@ -119,12 +121,12 @@ class Optimizer:
                 if all(𝕊.max_p_integral[k] <= 0 for k in range(x, n_x)):
                     𝕊.Pa[x+1:n_x] = [False] * (n_x-x)
                     skip = 1
-        
+
         𝕊.max_p_integral = 𝕊.compute_p_integral()
-    
+
     def merge_tops(𝕊):
         extremes = 𝕊.compute_extremes(𝕊.max_p_integral, 𝕊.Pm)
-        
+
         while extremes and (e := extremes.pop(0)):
             if e[1] == Optimizer.MIN:
                 j = []
@@ -137,7 +139,7 @@ class Optimizer:
                 if len(j) >= 2:
                     p1, p2 = 𝕊.find_peak_reduce_split_point(e[0], j[0], j[-1])
                     𝕊.Pa[p1:p2] = [False] * (p2-p1)
-                    𝕊.max_p_integral = 𝕊.compute_p_integral()   
+                    𝕊.max_p_integral = 𝕊.compute_p_integral()
                     𝕊.merge_tops()
                     return
 

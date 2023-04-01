@@ -1,11 +1,16 @@
 import math
 import random
 import requests
+import numpy as np
 
 template_query = "https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&timezone={timezone}&hourly=cloudcover,visibility&daily=sunrise,sunset"
 MAX_CLOUDCOVER = 100
 MAX_VISIBILITY = 240000
 # MAX_DIFFUSE_RADIATION = 1000
+
+def moving_average(values, window):
+    weights = np.repeat(1.0, window) / window
+    return np.convolve(values, weights, 'valid')
 
 def req_forecast(latitude, longitude, timezone):
 	return requests.get(template_query.format(latitude=latitude, longitude=longitude, timezone=timezone)).json()
@@ -50,8 +55,8 @@ def internal_forecast(latitude, longitude, timezone):
 			time = hour_info["time"][hour] + minute
 			day_night = 1 if (res["daily"]["sunrise"][math.floor(hour / 24)] <= time and time <= res["daily"]["sunset"][math.floor(hour / 24)]) else 0
 			y *= day_night
-			data.append(max(0, min(6 * (y + random.random() / 100), 1)))
-	return data
+			data.append(max(0, min(6 * y, 1)))
+	return moving_average(data, 60)
 
 
 if __name__ == "__main__":
