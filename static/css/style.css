@@ -111,36 +111,6 @@ header h1 {
     text-align: center;
 }
 
-/*Energy section*/
-.energy {
-    position: relative;
-    height: 400px;
-    width: 100%;
-    background-color: black;
-    font-family: 'Russo One', sans-serif;
-    color: white;
-}
-
-.energy h1 {
-    padding: 10px 0 0 0;
-    text-align: end;
-    color: white;
-    padding: 20px;
-    font-size: 80px;
-    text-decoration-line: underline;
-    text-shadow: 2px 2px 5px rgb(106, 157, 31), -2px -2px 5px rgb(36, 157, 255);
-}
-
-.energy p {
-    position: absolute;
-    top: 175px;
-    left: 100px;
-    font-size: 20px;
-}
-
-.energy p span {
-    font-size: 60px;
-}
 
 
 /*Weather section*/
@@ -304,31 +274,11 @@ header h1 {
         text-align: center;
     }
 
-    /*Energy section*/
-    .energy {
-        height: 400px;
-    }
-
-    .energy h1 {
-        padding: 10px 0 0 0;
-        text-align: end;
+    /*Panel section*/
+    #panel {
         color: white;
-        padding: 20px;
-        font-size: 30px;
     }
 
-    .energy p {
-        position: absolute;
-        top: 175px;
-        left: 25px;
-        font-size: 10px;
-    }
-
-    .energy p span {
-        font-size: 35px;
-    }
-
-    /*Weather section*/
     /*Weather section*/
     .battery {
         position: relative;
