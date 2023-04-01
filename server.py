@@ -3,7 +3,7 @@ from database import *
 
 class Reply:
     error = lambda: (jsonify({'error': 'L+ratio+you fell off'}), 500)
-    ok = lambda: (Response(status=200))
+    ok = lambda: Response(status=200)
     def __getattr__(self, name):
         return getattr(Reply, name)()
 Reply = Reply()
@@ -23,6 +23,8 @@ def getPanelData():
 @app.route('/addPanel', methods=['POST'])
 def addPanel():
     data = request.get_json()
+    if get_panel(data['id']):
+        return Reply.error
     set_panel(data)
     return Reply.ok
 
