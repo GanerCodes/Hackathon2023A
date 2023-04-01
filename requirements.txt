@@ -1,7 +1,7 @@
 flask
-sqlitedict
-mergedeep
-requests
-numpy
-
 geopy
+mergedeep
+matplotlib
+numpy
+requests
+sqlitedict

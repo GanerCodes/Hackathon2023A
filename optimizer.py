@@ -98,7 +98,6 @@ class Optimizer:
                 break
         else:
             raise Exception()
-        print(marker, p3)
         return marker, 𝕊.find_split_point(marker, p3)
 
     def flatten_tops(𝕊):
@@ -126,7 +125,9 @@ class Optimizer:
 
     def merge_tops(𝕊):
         extremes = 𝕊.compute_extremes(𝕊.max_p_integral, 𝕊.Pm)
-
+        if len(extremes):
+            extremes.insert(0, [0, 0])
+        
         while extremes and (e := extremes.pop(0)):
             if e[1] == Optimizer.MIN:
                 j = []
@@ -141,7 +142,6 @@ class Optimizer:
                     𝕊.Pa[p1:p2] = [False] * (p2-p1)
                     𝕊.max_p_integral = 𝕊.compute_p_integral()
                     𝕊.merge_tops()
-                    return
 
 if __name__ == "__main__":
     dt = 0.001
