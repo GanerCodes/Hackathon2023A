@@ -3,3 +3,4 @@ sqlitedict
 mergedeep
 requests
 geopy/geocodes library
+numpy

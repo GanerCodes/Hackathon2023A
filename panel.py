@@ -62,11 +62,14 @@ def create_schedule(curve, panel):
         "extremes": [{
             "time": time,
             "type": Type
-        } for time, Type in optimizer.compute_extremes]}
+        } for time, Type in optimizer.compute_extremes(
+            optimizer.max_p_integral,
+            optimizer.Pm
+        )]}
 
 if __name__ == "__main__":
     from forecast import internal_forecast
-    print(create_schedule(internal_forecast(
+    create_schedule(internal_forecast(
         36.0663068,
         -94.1738257,
         "America/Chicago"
@@ -75,7 +78,7 @@ if __name__ == "__main__":
         "battery": {
             "state": 1,
             "percent_charged": 0.5,
-            "charging_rate": 0.2,
-            "decharging_rate": 0.1
+            "charging_rate": 0.15,
+            "decharging_rate": 0.05
         }
-    }))
+    })
