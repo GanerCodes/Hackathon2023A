@@ -10,8 +10,7 @@ Types:
     }
 
 Logic:
-    
-    v: hours to get to 100%
+    oh no
 
 API:
     # First {...} is what the client sends and {...} is what the server replies with
