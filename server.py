@@ -50,11 +50,10 @@ def getForecast():
     data = request.get_json()
     return jsonify(forecast(data["latitude"], data["longitude"], data["timezone"]))
 
-
 @app.route("/getPanelSchedule", methods=["POST"])
 def getPanelSchedule():
     data = request.get_json()
     panel = get_panel(data['id'])
     if not panel:
         return Reply.error()
-    return jsonify(create_schedule(getForecast(), panel))
+    return jsonify(create_schedule(internal_forecast(), panel))
