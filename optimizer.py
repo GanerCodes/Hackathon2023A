@@ -141,20 +141,10 @@ class Optimizer:
                     𝕊.merge_tops()
                     return
             
-        """ for i in range(len(extremes)-2):
-            points = extremes[i:i+3]
-            if not all(p[1] == P for p, P in zip(points, pattern)):
-                continue
-            p1, p2 = 𝕊.find_peak_reduce_split_point(*[p[0] for p in points])
-            print("n", p1, p2)
-            𝕊.Pa[p1:p2] = [False] * (p2-p1)
-            𝕊.max_p_integral = 𝕊.compute_p_integral() """
-
-
 dt = 0.001
 j = Optimizer([
-    0.1*((x*dt)**1/2)*(cos((x*dt))+1) if x*dt < 40 else 0
-    for x in range(int(50 / dt))], dt=dt)
+    0.1*((x*dt)**1/2)*(cos((x*dt))+1) if ((x*dt) % 20) < 5 else 0
+    for x in range(int(120 / dt))], dt=dt)
 extremes = j.compute_extremes(j.max_p_integral, j.Pm, True)
 plt.plot(j.max_p_integral)
 plt.scatter(*zip(*extremes))
