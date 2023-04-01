@@ -1,4 +1,6 @@
-Number = float|int
+from optimizer import Optimizer
+
+Number = float | int
 
 def fit_data(obj, template):
     res = {}
@@ -13,6 +15,7 @@ def fit_data(obj, template):
             else:
                 res[n] = None
     return res
+
 
 Panel_template = {
     "id": str,
@@ -30,3 +33,16 @@ Panel_update_template = {
         "decharging_rate": Number
     }
 }
+
+def create_schedule(curve, panel):
+    battery = panel['battery']
+    optimizer = Optimizer(curve,
+                          starting_precentage=battery['percent_charged'],
+                          power_gain=battery['charging_rate'],
+                          power_draw=battery['decharging_rate'],
+                          max_power=1,
+                          dt=1/60)
+    optimizer.merge_tops()
+    return {
+        "state_schedule": optimizer.Pa,
+        "extremes": optimizer.compute_extremes}

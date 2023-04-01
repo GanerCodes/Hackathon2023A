@@ -140,15 +140,16 @@ class Optimizer:
                     𝕊.max_p_integral = 𝕊.compute_p_integral()   
                     𝕊.merge_tops()
                     return
-            
-dt = 0.001
-j = Optimizer([
-    0.1*((x*dt)**1/2)*(cos((x*dt))+1) if ((x*dt) % 20) < 5 else 0
-    for x in range(int(120 / dt))], dt=dt)
-extremes = j.compute_extremes(j.max_p_integral, j.Pm, True)
-plt.plot(j.max_p_integral)
-plt.scatter(*zip(*extremes))
-j.merge_tops()
-plt.plot(j.max_p_integral)
-plt.plot(*zip(*enumerate(j.Pa)))
-plt.show()
+
+if __name__ == "__main__":
+    dt = 0.001
+    j = Optimizer([
+        0.1*((x*dt)**1/2)*(cos((x*dt))+1) if ((x*dt) % 20) < 5 else 0
+        for x in range(int(120 / dt))], dt=dt)
+    extremes = j.compute_extremes(j.max_p_integral, j.Pm, True)
+    plt.plot(j.max_p_integral)
+    plt.scatter(*zip(*extremes))
+    j.merge_tops()
+    plt.plot(j.max_p_integral)
+    plt.plot(*zip(*enumerate(j.Pa)))
+    plt.show()

@@ -1,6 +1,7 @@
 from flask import *
 from database import *
 from forecast import *
+from panel import create_schedule
 
 class Reply:
     error = lambda: (jsonify({'error': 'L+ratio+you fell off'}), 500)
@@ -37,3 +38,11 @@ def setPanelData():
 def getForecast():
 	data = request.get_json()
 	return jsonify(forecast(data["latitude"], data["longitude"], data["timezone"]))
+
+@app.route("/getPanelSchedule", methods=["POST"])
+def getPanelSchedule():
+    data = request.get_json()
+    panel = get_panel(data['id'])
+    if not panel:
+        return Reply.error()
+    return jsonify(create_schedule(panel))
