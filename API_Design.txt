@@ -1,15 +1,28 @@
-types:
-SOLAR_PANEL_OBJECT {
-    id: "A039B8CD"
-    battery: {
-        state ∈ {"disconnected", "charging", "empty"}
-        precent_charged: float [0-1]
-    } 
-}
-# SOLAR_PANEL_BATTERY_STATE ∈ {"charging"}
+Types:
+    SOLAR_PANEL_OBJECT {
+        id: "A039B8CD"
+        battery: {
+            state ∈ {"disconnected", "charging", "empty"}
+            precent_charged: float [0-1]
+            charging_rate: float (%/hr)
+            decharging_rate: float (%/hr)
+        }
+    }
 
-/getPanelData {
-    id: SOLARID
-} → SOLAR_PANEL_OBJECT
+Logic:
+    
+    v: hours to get to 100%
 
-/
+API:
+    # First {...} is what the client sends and {...} is what the server replies with
+    # Note: "?" means optional
+
+    /getPanelData {
+        id: SOLARID
+    } → SOLAR_PANEL_OBJECT
+
+    /setPanelData {
+        id: SOLARID
+        ? charging_rate: float
+        ? decharging_rate: float
+    } → ∅
