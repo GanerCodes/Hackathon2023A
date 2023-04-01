@@ -1,17 +1,32 @@
-class Panel:
-    STATES = {0: "disconnected",
-              1: "charging",
-              2: "empty"}
+Number = float|int
 
-    class Battery:
-        def Battery(self,
-                    precent_charged: float,
-                    charging_rate: float,
-                    decharging_rate: float):
-            self.precent_charged = precent_charged
-            self.charging_rate = charging_rate
-            self.decharging_rate = decharging_rate
+def fit_data(obj, template):
+    res = {}
+    dict_obj = type(obj) == dict
+    for n, t in template.items():
+        valid_obj = dict_obj and n in obj
+        if isinstance(t, dict):
+            res[n] = fit_data(obj[n] if valid_obj else None, t)
+        else:
+            if valid_obj and isinstance(obj[n], t):
+                res[n] = obj[n]
+            else:
+                res[n] = None
+    return res
 
-    def Panel(self, ID: str, battery: Battery):
-        self.ID = ID
-        self.battery = battery
+Panel_template = {
+    "id": str,
+    "battery": {
+        "state": int,
+        "percent_charged": Number,
+        "charging_rate": Number,
+        "decharging_rate": Number
+    }
+}
+
+Panel_update_template = {
+    "battery": {
+        "charging_rate": Number,
+        "decharging_rate": Number
+    }
+}
