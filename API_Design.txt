@@ -2,7 +2,7 @@ Types:
     SOLAR_PANEL_OBJECT {
         id: "A039B8CD"
         battery: {
-            state ∈ {"disconnected", "charging", "empty"}
+            state ∈ {0, 1, 2} # Represents "disconnected", "charging", "empty"
             precent_charged: float [0-1]
             charging_rate: float (%/hr)
             decharging_rate: float (%/hr)
@@ -16,13 +16,13 @@ API:
     # First {...} is what the client sends and {...} is what the server replies with
     # Note: "?" means optional
 
-    /getPanelData {
+    POST /getPanelData {
         id: SOLARID
     } → SOLAR_PANEL_OBJECT
     
-    /addPanel {SOLAR_PANEL_OBJECT} → ∅
+    POST /addPanel {SOLAR_PANEL_OBJECT} → ∅
     
-    /setPanelData {
+    POST /setPanelData {
         id: SOLARID
         ? battery {
             ? charging_rate: float
