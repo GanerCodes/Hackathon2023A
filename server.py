@@ -4,7 +4,6 @@ from forecast import *
 from panel import create_schedule
 from time import time
 
-
 class Reply:
     def error(): return (jsonify({'error': 'L+ratio+you fell off'}), 500)
     def ok(): return Response(status=200)
