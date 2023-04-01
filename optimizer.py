@@ -143,16 +143,6 @@ class Optimizer:
                     𝕊.merge_tops()
                     return
 
-    def render_scheg(𝕊, image_name="panel.png"):
-        extremes = j.compute_extremes(j.max_p_integral, j.Pm, True)
-        plt.plot(j.max_p_integral)
-        plt.scatter(*zip(*extremes))
-        j.merge_tops()
-        plt.plot(j.max_p_integral)
-        plt.plot(*zip(*enumerate(j.Pa)))
-        plt.savefig(os.path.join("./static/panel_images",  image_name))
-
-
 if __name__ == "__main__":
     dt = 0.001
     j = Optimizer([
