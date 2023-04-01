@@ -22,7 +22,7 @@
     <script src="./js/interface.js"></script>
     <script src="./js/background.js"></script>
     <script src="./js/settings.js"></script>
-    <script src="./js/.js"></script>
+    <script src="./js/integrate.js"></script>
 
     <div class="navbar">
         <ul>
@@ -95,22 +95,44 @@
         </ul>
     </section>
 
-    <section id="panel">
+    <section class="panel">
         <h1>Panel</h1>
         <div class="panel-add">
-            <label for="nameId">Name ID: </label>
-            <input type="text" id="nameId" name="nameId" required><br>
-            <label for="currentCharge">Current charge </label>
-            <input type="currentCharge" id="currentCharge" name="currentCharge"><br>
-            <label for="dischargeRate">Discharge Rate: </label>
-            <input type="dischargeRate" id="dischargeRate" name="dischargeRate"><br>
+            <div>
+                <label for="nameId">Name ID: </label>
+                <input type="text" id="nameId" name="nameId" required>
+            </div>
+            <div>
+                <label for="currentCharge">Current charge </label>
+                <input type="currentCharge" id="currentCharge" name="currentCharge">
+            </div>
+            <div>
+                <label for="currentRate">Current rate </label>
+                <input type="currentRate" id="currentRate" name="currentRate">
+            </div>
+            <div>
+                <label for="dischargeRate">Discharge Rate: </label>
+                <input type="dischargeRate" id="dischargeRate" name="dischargeRate">
+            </div>
             <input type="submit">
         </div>
         <div class="panel-edit">
-            <p>id demo</p>
-            <p>current charge</p>
-            <p>change rate</p>
-            <p>discharge rate</p>
+            <div>
+                <p>id demo</p>
+                <p>value</p>
+            </div>
+            <div>
+                <p>current charge</p>
+                <p>value</p>
+            </div>
+            <div>
+                <p>change rate</p>
+                <p>value</p>
+            </div>
+            <div>
+                <p>discharge rate</p>
+                <p>value</p>
+            </div>
         </div>
     </section>
 
@@ -120,8 +142,8 @@
             aspernatur totam, quia blanditiis, itaque porro alias consequuntur, aut beatae non architecto? Ex, rerum
             fugiat. Hic, perspiciatis?</p>
         <i class="fa-sharp fa-solid fa-battery-empty"></i>
-        <div></div>
-        <p id="battery-info"> 100 </p>
+        <div id="battery-bar"></div>
+        <p id="battery-info"> 50 </p>
         <i class="fa-solid fa-bolt"></i>
     </section>
 
