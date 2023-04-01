@@ -1,28 +1,45 @@
-function getPanelData(solarId) {
+//FORECAST STUFF
+function getForecast(callback) {
+	getLocation((coords) => {
+		neufetch("getForecast", {
+			latitude: coords.latitude,
+			longitude: coords.longitude,
+			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+		}, (data) => {
+			console.debug("getForecast", data);
+			callback(data);
+		});
+	});
+}
+
+
+//PANEL STUFF
+function getPanelData(solarId, callback) {
 	neufetch("getPanelData", { id: solarId }, (data) => {
-		console.log("get", data);
-		panels[solarId] = data;
+		console.debug("getPanelData", data);
+		internal_panels[solarId] = data;
+		callback(data);
 	});
 }
 
 function addPanel(panel) {
 	neufetch("addPanel", panel, (data) => {
-		console.log("add", data);
-		panels[panel.id] = panel;
+		console.debug("addPanel", data);
+		internal_panels[panel.id] = panel;
 	});
 }
 
 function setPanelData(solarId, chargeRates) {
-	let newPanel = new Panel(panels[solarId], chargeRates);
+	let newPanel = new Panel(internal_panels[solarId], chargeRates);
 	neufetch("setPanelData", newPanel, (data) => {
-		console.log("set", data);
-		panels[solarId] = newPanel;
+		console.debug("setPanelData", data);
+		internal_panels[solarId] = newPanel;
 	});
 }
 
 
 //internal
-var panels = {};
+var internal_panels = {};
 
 function neufetch(route, reqData, callback) {
 	fetch(`http://localhost:5000/${route}`, {

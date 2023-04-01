@@ -1,3 +1,25 @@
+//FORECAST STUFF
+const WEEKDAYS = Object.freeze(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]);
+
+class Coordinates {
+	constructor(latitude, longitude) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+}
+
+class DailyStat {
+	constructor(sunrise, sunset, cloudcover, visibility) {
+		this.sunrise = sunrise;
+		this.sunset = sunset;
+		this.cloudcover = cloudcover;
+		this.visibility = visibility;
+		this.weekday = WEEKDAYS[(new Date(sunrise)).getDay()];
+	}
+}
+
+
+//PANEL STUFF
 const BatteryStates = Object.freeze({
 	DISCONNECTED: 0,
 	CHARGING: 1,

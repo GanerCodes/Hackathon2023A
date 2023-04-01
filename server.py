@@ -1,5 +1,6 @@
 from flask import *
 from database import *
+from forecast import *
 
 class Reply:
     error = lambda: (jsonify({'error': 'L+ratio+you fell off'}), 500)
@@ -31,3 +32,8 @@ def setPanelData():
     data = request.get_json()
     merge_panel(data)
     return Reply.ok()
+
+@app.route("/getForecast", methods=["POST"])
+def getForecast():
+	data = request.get_json()
+	return jsonify(forecast(data["latitude"], data["longitude"], data["timezone"]))
