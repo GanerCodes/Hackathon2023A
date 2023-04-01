@@ -1,5 +1,6 @@
 //GENERAL STUFF
 const DAYS = 7;
+const BATTERY_BAR_MAX_WIDTH = 400;
 var autoRefresh = true;
 var daylightElements = [],
 	cloudcoverElements = [],
@@ -25,9 +26,9 @@ function updateDisplay() {
 
 	//change battery info
 	if(!!Object.keys(panels).length) {
-		let percent_charged = panels[panelIds[0]].battery.percent_charged;;
+		let percent_charged = panels[panelIds[0]].battery.percent_charged;
 		batteryTextElement.innerHTML = `${Math.round(100 * percent_charged)}`;
-		batteryBarElement.style.width = `${percent_charged * 400}px`;
+		batteryBarElement.style.width = `${percent_charged * BATTERY_BAR_MAX_WIDTH}px`;
 	}
 }
 
