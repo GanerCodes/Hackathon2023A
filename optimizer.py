@@ -68,7 +68,7 @@ class Optimizer:
                     extremes.append((i, Optimizer.MAX))
         return extremes
 
-    def find_split_point(𝕊, p1, p2, target=None, lb=None, rb=None):
+    def find_split_point(𝕊, p1, p2, target=None):
         target = target or 𝕊.Pm
         
         gain_cache = 𝕊.compute_gain_integral(0, len(𝕊.Pe))
@@ -88,8 +88,12 @@ class Optimizer:
         gain_cache = 𝕊.compute_gain_integral(0, len(𝕊.Pe))
         start_val = 𝕊.max_p_integral[p1]
         for i in reversed(range(p1, p2)):
-            start_val = 
-            
+            if start_val + gain_cache[i] < 0.8 * 𝕊.pM:
+                marker = i + 1
+                break
+        else:
+            raise Exception()
+        return marker, 𝕊.find_split_point(marker, p3)
     
     def flatten_tops(𝕊):
         extremes = 𝕊.compute_extremes(𝕊.max_p_integral, 𝕊.Pm)
@@ -113,6 +117,14 @@ class Optimizer:
                     skip = 1
         
         𝕊.max_p_integral = 𝕊.compute_p_integral()
+    
+    def merge_tops(𝕊):
+        extremes = 𝕊.compute_extremes(𝕊.max_p_integral, 𝕊.Pm)
+        for i in range(len(extremes)-2):
+            points = extremes[i:i+3]
+            if not all(p[1] == P for p, P in zip(points, (Optimizer.MIN, Optimizer.MAX, Optimizer.MAX))):
+                continue
+            
 
 dt = 0.001
 j = Optimizer([0.1*((x*dt)**1/4)*(cos((x*dt))+1) for x in range(int(50 / dt))], dt=dt)
