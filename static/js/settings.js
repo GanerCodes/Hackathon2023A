@@ -1,0 +1,3 @@
+var pNameElement,
+	pChargeElement,
+	pb
