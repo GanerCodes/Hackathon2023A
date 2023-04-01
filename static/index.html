@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+        <title>Solar Sustainability</title>
     </head>
     <body>
-        <h1>auijdiasod</h1>
+        <div class="navbar">
+            <ul>
+                <li id="logo">∅<--<</li>
+            </ul>
+            <ul>
+                <li>Home</li>
+                <li>Login</li>
+            </ul>
+        </div>
+        <header>
+            <h1>HELIOS MECHANiSM</h1>
+        </header>
+
+        <section class="forcast">
+            <h1>Forcast (24 hours)</h1>
+
+        </section>
+
+        <section class="energy"></section>
+
+        <section class="battery">
+            <p id="battery-info"></p>
+        </section>
+
         <script>
             fetch('/api')
                 .then(response => response.json())
