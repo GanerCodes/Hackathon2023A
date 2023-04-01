@@ -1,4 +1,5 @@
 function zero(x, d) {
+	x = x.toString();
 	while(x.length < d) {
 		x = "0" + x;
 	}

@@ -10,11 +10,12 @@ function updateDisplay() {
 	//just going to trust the html will have 7 elements lol
 	for(let i = 0; i < DAYS; i++) {
 		let day_info = forecast[i];
+		console.log(day_info);
 		let sunrise = new Date(day_info.sunrise),
 			sunset = new Date(day_info.sunset);
 		daylightElements[i].innerHTML = `${zero(sunrise.getHours(), 2)}:${zero(sunrise.getMinutes(), 2)} - ${zero(sunset.getHours(), 2)}:${zero(sunset.getMinutes(), 2)}`;
-		cloudcoverElements[i].innerHTML = `${round(day_info.cloudcover, 2)}%`;
-		visibilityElements[i].innerHTML = `${round(day_info.visibility, 2)}%`;
+		cloudcoverElements[i].innerHTML = `${round(100 * day_info.cloudcover, 2)}%`;
+		visibilityElements[i].innerHTML = `${round(100 * day_info.visibility, 2)}%`;
 		weekdayElements[i].innerHTML = day_info.weekday;
 	}
 }
@@ -34,20 +35,23 @@ function refreshForecastData() {
 
 			//average daily cloudcover and visibility
 			let avg_cloudcover = 0,
-				avg_visibility = 0;
+				avg_visibility = 0,
+				daylight_hours = 0;
 			for(let hour = 0; hour < 24; hour++) {
 				//!	NOTICE: daily cloudcover and visibility is only during daylight hours
 				let x = data[day].hourly[hour];
 				if(x.time < sunrise || x.time > sunset) continue;
+				daylight_hours++;
 				avg_cloudcover += x.cloudcover;
 				avg_visibility += x.visibility;
 			}
-			avg_cloudcover /= 24;
-			avg_visibility /= 24;
+			avg_cloudcover /= daylight_hours;
+			avg_visibility /= daylight_hours;
 
 			//actually store info
 			forecast[day] = new DailyStat(sunrise, sunset, avg_cloudcover, avg_visibility);
 		}
+		updateDisplay();
 	});
 }
 
@@ -76,6 +80,8 @@ function refreshBatteryData() {
 		panels[id] = data;
 	});
 	rollingPanelIndex = (rollingPanelIndex + 1) % panelIds.length;
+
+	updateDisplay();
 }
 
 
@@ -103,11 +109,9 @@ window.addEventListener("load", () => {
 	weekdayElements = document.getElementsByClassName("day");
 
 	//loops
-	setInterval(updateDisplay, 10000);
-
 	refreshBatteryData();
 	setInterval(refreshBatteryData, 5000);
 
 	refreshForecastData();
-	setInterval(refreshForecastData, 60000,);
+	setInterval(refreshForecastData, 60000);
 });
