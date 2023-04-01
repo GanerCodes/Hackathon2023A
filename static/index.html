@@ -21,6 +21,8 @@
     <script src="./js/geolocation.js"></script>
     <script src="./js/interface.js"></script>
     <script src="./js/background.js"></script>
+    <script src="./js/settings.js"></script>
+    <script src="./js/.js"></script>
 
     <div class="navbar">
         <ul>
@@ -93,11 +95,23 @@
         </ul>
     </section>
 
-    <section class="panel">
-		<label for="panel_name"></label>
-		<input id="panel_name"/>
-		<label for=""></label>
-		<input/>
+    <section id="panel">
+        <h1>Panel</h1>
+        <div class="panel-add">
+            <label for="nameId">Name ID: </label>
+            <input type="text" id="nameId" name="nameId" required><br>
+            <label for="currentCharge">Current charge </label>
+            <input type="currentCharge" id="currentCharge" name="currentCharge"><br>
+            <label for="dischargeRate">Discharge Rate: </label>
+            <input type="dischargeRate" id="dischargeRate" name="dischargeRate"><br>
+            <input type="submit">
+        </div>
+        <div class="panel-edit">
+            <p>id demo</p>
+            <p>current charge</p>
+            <p>change rate</p>
+            <p>discharge rate</p>
+        </div>
     </section>
 
     <section class="battery">

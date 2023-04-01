@@ -1,6 +1,7 @@
 flask
-sqlitedict
+geopy
 mergedeep
-requests
-geopy/geocodes library
+matplotlib
 numpy
+requests
+sqlitedict
