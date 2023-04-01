@@ -20,6 +20,10 @@ API:
         id: SOLARID
     } → SOLAR_PANEL_OBJECT
     
+    POST /getPanelSchedule {
+        id: SOLARID
+    } → SOLAR_SCHEDULE_OBEJCT
+    
     POST /addPanel {SOLAR_PANEL_OBJECT} → ∅
     
     POST /setPanelData {
