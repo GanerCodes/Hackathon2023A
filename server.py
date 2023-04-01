@@ -1,5 +1,5 @@
 # from flask import Flask, render_template, send_from_directory, redirect, url_for
-import sqlitedict
+from sqlitedict import SqliteDict
 from flask import *
 database = SqliteDict("database.sqlite", tablename="product", autocommit=True)
 
