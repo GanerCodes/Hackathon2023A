@@ -19,7 +19,7 @@ function updateDisplay() {
 		cloudcoverElements[i].innerHTML = `${round(100 * day_info.cloudcover, 2)}%`;
 		visibilityElements[i].innerHTML = `${round(100 * day_info.visibility, 2)}%`;
 		weekdayElements[i].innerHTML = day_info.weekday;
-		imgElements[i].src = `./img/${IMG_SRCS[Math.round(100 * day_info.cloudcover) % 5]}.png`;
+		//imgElements[i].src = `./img/${IMG_SRCS[Math.round(100 * day_info.cloudcover) % 5]}.png`;
 	}
 }
 
