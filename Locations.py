@@ -7,5 +7,5 @@ def getCoords(address):
 	return (location.latitude, location.longitude)
 
 # test
-address = '1175, W Cleveland St, Fayetteville, Arkansas, 72701, United States of America'
-print(getCoords(address))
+# address = '1175, W Cleveland St, Fayetteville, Arkansas, 72701, United States of America'
+# print(getCoords(address))
