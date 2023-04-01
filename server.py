@@ -8,6 +8,11 @@ class Reply:
         return getattr(Reply, name)()
 Reply = Reply()
 
+def add_panel(panel: Panel):
+    
+    print('a' in database)
+
+exit()
 app = Flask(__name__)
 
 app.route('/')(lambda: redirect(url_for('static', filename='index.html')))
