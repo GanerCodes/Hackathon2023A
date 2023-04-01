@@ -1,10 +1,16 @@
+import math
 import random
 import requests
+import numpy as np
 
 template_query = "https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&timezone={timezone}&hourly=cloudcover,visibility&daily=sunrise,sunset"
 MAX_CLOUDCOVER = 100
 MAX_VISIBILITY = 240000
 # MAX_DIFFUSE_RADIATION = 1000
+
+def moving_average(values, window):
+    weights = np.repeat(1.0, window) / window
+    return np.convolve(values, weights, 'valid')
 
 def req_forecast(latitude, longitude, timezone):
 	return requests.get(template_query.format(latitude=latitude, longitude=longitude, timezone=timezone)).json()
@@ -31,21 +37,26 @@ def forecast(lat, long, tz):
 	return parse_forecast(req_forecast(lat, long, tz))
 
 
-internal_template_query = "https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&timezone={timezone}&hourly=cloudcover,visibility,direct_radiation,diffuse_radiation&forecast_days=3"
+# num days is 3
+internal_template_query = "https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&timezone={timezone}&hourly=cloudcover,visibility&daily=sunrise,sunset&forecast_days=3&timeformat=unixtime"
 
+# dt is 1 minute
 def internal_forecast(latitude, longitude, timezone):
 	res = requests.get(internal_template_query.format(latitude=latitude, longitude=longitude, timezone=timezone)).json()
+	#return res
 	data = []
-	for i in range(0, len(res["hourly"]["time"])):
-		x = res["hourly"]
-		# not the most accurate but whatever
-		cloudcover = (1 - (x["cloudcover"][i] / MAX_CLOUDCOVER))
-		visibility = (x["visibility"][i] / MAX_VISIBILITY)
-		radiation = (x["diffuse_radiation"][i] / (1 + x["diffuse_radiation"][i] + x["direct_radiation"][i]))
-		y = cloudcover * visibility * radiation
-		for l in range(0, 60):
-			data.append(max(0, min(y + random.random() / 100, 1)))
-	return data
+	for hour in range(0, len(res["hourly"]["time"])):
+		hour_info = res["hourly"]
+		# not the most accurate but time crunch
+		cloudcover = (1 - (hour_info["cloudcover"][hour] / MAX_CLOUDCOVER))
+		visibility = (hour_info["visibility"][hour] / MAX_VISIBILITY)
+		y = cloudcover * visibility
+		for minute in range(0, 60):
+			time = hour_info["time"][hour] + minute
+			day_night = 1 if (res["daily"]["sunrise"][math.floor(hour / 24)] <= time and time <= res["daily"]["sunset"][math.floor(hour / 24)]) else 0
+			y *= day_night
+			data.append(max(0, min(6 * y, 1)))
+	return moving_average(data, 60)
 
 
 if __name__ == "__main__":

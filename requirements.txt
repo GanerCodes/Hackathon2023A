@@ -2,3 +2,6 @@ flask
 sqlitedict
 mergedeep
 requests
+numpy
+
+geopy
