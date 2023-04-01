@@ -1,0 +1,15 @@
+types:
+SOLAR_PANEL_OBJECT {
+    id: "A039B8CD"
+    battery: {
+        state ∈ {"disconnected", "charging", "empty"}
+        precent_charged: float [0-1]
+    } 
+}
+# SOLAR_PANEL_BATTERY_STATE ∈ {"charging"}
+
+/getPanelData {
+    id: SOLARID
+} → SOLAR_PANEL_OBJECT
+
+/
