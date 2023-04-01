@@ -1,107 +1,114 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	    <meta charset="UTF-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <link rel="stylesheet" href="style.css">
-	    <link rel="preconnect" href="https://fonts.googleapis.com">
-	    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-	    <title>Solar Sustainability</title>
-    </head>
 
-    <body>
-		<script src="./js/helpers.js"></script>
-		<script src="./js/model.js"></script>
-		<script src="./js/geolocation.js"></script>
-		<script src="./js/interface.js"></script>
-		<script src="./js/background.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Solar Sustainability</title>
+</head>
 
-        <div class="navbar">
-            <ul>
-                <li id="logo"> ∅<--< </li>
-            </ul>
-            <ul>
-                <li>Home</li>
-                <li>Login</li>
-            </ul>
-        </div>
-        <header>
-            <h1>HELIOS MECHANiSM</h1>
-        </header>
+<body>
+    <script src="./js/helpers.js"></script>
+    <script src="./js/model.js"></script>
+    <script src="./js/geolocation.js"></script>
+    <script src="./js/interface.js"></script>
+    <script src="./js/background.js"></script>
 
-        <section class="forecast">
-            <h1>Forecast</h1>
-            <ul id="bigger-days">
-                <li>
-                    <img src="#" alt="sunday-image">
-                    <p class="daylight">Daylight</p>
-                    <p class="cloud-cover">Cloud cover</p>
-                    <p class="day">Sunday</p>
-                    <p class="visibility">visibility</p>
-                </li>
-                <li>
-                    <img src="#" alt="monday-image">
-                    <p class="daylight">Daylight</p>
-                    <p class="cloud-cover">Cloud cover</p>
-                    <p class="day">Monday</p>
-                    <p class="visibility">visibility</p>
-                </li>
-                <li>
-                    <img src="#" alt="tuesday-image">
-                    <p class="daylight">Daylight</p>
-                    <p class="cloud-cover">Cloud cover</p>
-                    <p class="day">Tuesday</p>
-                    <p class="visibility">visibility</p>
-                </li>
-            </ul>
-            <ul id="smaller-days">
-                <li>
-                    <img src="#" alt="wednesday-image">
-                    <p class="daylight">Daylight</p>
-                    <p class="cloud-cover">Cloud cover</p>
-                    <p class="day">Wednesday</p>
-                    <p class="visibility">visibility</p>
-                </li>
-                <li>
-                    <img src="#" alt="thursday-image">
-                    <p class="daylight">Daylight</p>
-                    <p class="cloud-cover">Cloud cover</p>
-                    <p class="day">Thursday</p>
-                    <p class="visibility">visibility</p>
-                </li>
-                <li>
-                    <img src="#" alt="friday-image">
-                    <p class="daylight">Daylight</p>
-                    <p class="cloud-cover">Cloud cover</p>
-                    <p class="day">Friday</p>
-                    <p class="visibility">visibility</p>
-                </li>
-                <li>
-                    <img src="#" alt="saturday-image">
-                    <p class="daylight">Daylight</p>
-                    <p class="cloud-cover">Cloud cover</p>
-                    <p class="day">Saturday</p>
-                    <p class="visibility">visibility</p>
-                </li>
+    <div class="navbar">
+        <ul>
+            <li id="logo"> ∅<--< </li>
+        </ul>
+        <ul>
+            <li>Home</li>
+            <li>Login</li>
+        </ul>
+    </div>
+    <div id="mobile-use"></div>
+    <header>
+        <h1>HELIOS MECHANiSM</h1>
+    </header>
 
-            </ul>
-        </section>
+    <section class="forecast">
+        <h1>Forecast</h1>
+        <ul id="bigger-days">
+            <li>
+                <img src="#" class="image">
+                <p class="daylight">Daylight</p>
+                <p class="cloud-cover">Cloud cover</p>
+                <p class="day">Sunday</p>
+                <p class="visibility">visibility</p>
+            </li>
+            <li>
+                <img src="#" class="image">
+                <p class="daylight">Daylight</p>
+                <p class="cloud-cover">Cloud cover</p>
+                <p class="day">Monday</p>
+                <p class="visibility">visibility</p>
+            </li>
+            <li>
+                <img src="#" class="image">
+                <p class="daylight">Daylight</p>
+                <p class="cloud-cover">Cloud cover</p>
+                <p class="day">Tuesday</p>
+                <p class="visibility">visibility</p>
+            </li>
+        </ul>
+        <ul id="smaller-days">
+            <li>
+                <img src="#" class="image">
+                <p class="daylight">Daylight</p>
+                <p class="cloud-cover">Cloud cover</p>
+                <p class="day">Wednesday</p>
+                <p class="visibility">visibility</p>
+            </li>
+            <li>
+                <img src="#" class="image">
+                <p class="daylight">Daylight</p>
+                <p class="cloud-cover">Cloud cover</p>
+                <p class="day">Thursday</p>
+                <p class="visibility">visibility</p>
+            </li>
+            <li>
+                <img src="#" class="image">
+                <p class="daylight">Daylight</p>
+                <p class="cloud-cover">Cloud cover</p>
+                <p class="day">Friday</p>
+                <p class="visibility">visibility</p>
+            </li>
+            <li>
+                <img src="#" class="image">
+                <p class="daylight">Daylight</p>
+                <p class="cloud-cover">Cloud cover</p>
+                <p class="day">Saturday</p>
+                <p class="visibility">visibility</p>
+            </li>
+        </ul>
+    </section>
 
-        <section class="energy">
-            <h1>Energy Saved</h1>
-            <p><span>1000</span> watts saved</p>
-        </section>
+    <section class="energy">
+        <h1>Energy Saved</h1>
+        <p><span>1000</span> watts saved</p>
+    </section>
 
-        <section class="battery">
-            <h1>Battery</h1>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum aliquid accusamus soluta nostrum
-                aspernatur totam, quia blanditiis, itaque porro alias consequuntur, aut beatae non architecto? Ex, rerum
-                fugiat. Hic, perspiciatis?</p>
-            <div></div>
-            <p id="battery-info"></p>
-        </section>
+    <section class="battery">
+        <h1>Battery</h1>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum aliquid accusamus soluta nostrum
+            aspernatur totam, quia blanditiis, itaque porro alias consequuntur, aut beatae non architecto? Ex, rerum
+            fugiat. Hic, perspiciatis?</p>
+        <i class="fa-sharp fa-solid fa-battery-empty"></i>
+        <div></div>
+        <p id="battery-info"> 100 </p>
+        <i class="fa-solid fa-bolt"></i>
+    </section>
 
-    </body>
+</body>
+
 </html>
